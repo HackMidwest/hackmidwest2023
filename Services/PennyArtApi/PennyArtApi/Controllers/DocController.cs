@@ -31,5 +31,11 @@ namespace PennyArtApi.Controllers
                 Guid.NewGuid().ToString()
             };
         }
+
+        [HttpPost("{userId}/{filename}")]
+        public void Post([FromRoute] string userId, IFormFile doc)
+        {
+            Ok();
+        }
     }
 }
