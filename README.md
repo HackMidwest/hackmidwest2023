@@ -15,10 +15,10 @@ Ensure you have reviewed the [Rules & FAQ](https://hackmidwest.com/#faq)
 *List the full names,  email address & Github username of your teammates*
 
 1.   **Full Name**  || **fullname@company.com**  (or fullname@school.edu if you're a CS student) || **Github Username**
-2. 
-3.
-4.
-5.
+2. Shreyas Mocherla || vmgng@umsystem.edu || AIWithShrey
+3. Carter Wagner || cjwwcw@umsystem.edu || cjwagn1
+4. Ben Brooks || bdbfvr@umsystem.edu || ben9brooks
+5. Himanth Bobba || hkbkmq@umsystem.edu || Kris283
 
 <br /><br />
 
