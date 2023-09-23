@@ -1,0 +1,77 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\repos\\pennyart\\Services\\PennyArtApi\\PennyArtApi\\PennyArtApi.csproj": {}
+  },
+  "projects": {
+    "C:\\repos\\pennyart\\Services\\PennyArtApi\\PennyArtApi\\PennyArtApi.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\repos\\pennyart\\Services\\PennyArtApi\\PennyArtApi\\PennyArtApi.csproj",
+        "projectName": "PennyArtApi",
+        "projectPath": "C:\\repos\\pennyart\\Services\\PennyArtApi\\PennyArtApi\\PennyArtApi.csproj",
+        "packagesPath": "C:\\Users\\A2604657\\.nuget\\packages\\",
+        "outputPath": "C:\\repos\\pennyart\\Services\\PennyArtApi\\PennyArtApi\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\A2604657\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Users\\A2604657\\Downloads\\h23": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/hrblock/_packaging/edm-artifacts/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[7.0.11, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
