@@ -2,7 +2,7 @@ import os
 import azure.cognitiveservices.speech as speechsdk
 
 # Keys to connect to azure resource
-speach_key = "5bd93420835547f894ab881cb6e3586a"
+speach_key = "speech key"
 speech_origin = "centralus"
 
 # This example requires environment variables named "SPEECH_KEY" and "SPEECH_REGION"
