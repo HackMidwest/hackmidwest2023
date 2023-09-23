@@ -1,9 +1,15 @@
 {
 
-    "speech_key": "",
+    "speech_key": "5bd93420835547f894ab881cb6e3586a",
 
-    "speech_origin": "",
+    "speech_origin": "centralus",
 
-    "OAI-API": ""
+    "OAI-API": "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",
+
+    "neo4j-uri": "",
+
+    "neo4j-username": "" ,
+
+    "neo4j-pass": "" 
 
 }

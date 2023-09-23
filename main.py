@@ -2,6 +2,7 @@ import os
 import azure.cognitiveservices.speech as speechsdk
 import text_to_speech_conv
 import speech_recognition
+import prompt_database
 import openai
 import json
 
@@ -33,15 +34,16 @@ while True:
         if(flag == "y" or flag == "Y"):
             user_speech = text_to_speech_conv.text_to_speech_conv(user_text)
 
-            response = openai.Completion.create(
-                engine='text-davinci-003',
-                prompt=user_text,
-                max_tokens=1000
-            )
+            # response = openai.Completion.create(
+            #     engine='text-davinci-003',
+            #     prompt=user_text,
+            #     max_tokens=1000
+            # )
 
-            api_call_counter += 1
+            # api_call_counter += 1
 
-            ai_text = response.choices[0].text.strip()
+            # ai_text = response.choices[0].text.strip()
+            ai_text = prompt_database.answer_question(user_text)
             print(f"[MAIN] AI Test: {ai_text}")
             ai_speech = text_to_speech_conv.text_to_speech_conv(ai_text)
 
