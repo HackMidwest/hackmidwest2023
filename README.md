@@ -14,9 +14,9 @@ Ensure you have reviewed the [Rules & FAQ](https://hackmidwest.com/#faq)
 ## Who's on your team?
 *List the full names,  email address & Github username of your teammates*
 
-1.   **Full Name**  || **fullname@company.com**  (or fullname@school.edu if you're a CS student) || **Github Username**
-2. 
-3.
+1. Blake Richmeier || blake.richmeier@hrblock.com || brichVH
+2. Long Thai || long.thai@hrblock.com || thaiquanglong 
+3. Umar Khan || umar.khan@hrblock.com || UmarKhan11
 4.
 5.
 
@@ -38,8 +38,8 @@ Ensure you have reviewed the [Rules & FAQ](https://hackmidwest.com/#faq)
 - [ ]  Pinata Challenge
 - [ ]  Pinata ERC-6551 Challenge
 - [ ]  Okta Challenge
-- [ ]  GEHA Generative AI Emergency Response Challenge
-- [ ]  Corporate Challenge (only for official company teams)
+- [X]  GEHA Generative AI Emergency Response Challenge
+- [X]  Corporate Challenge (only for official company teams)
 - [ ]  College Challenge (only for teams of up to 5 CS students from the same school)
 
 <br /><br />
