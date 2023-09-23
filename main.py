@@ -1,33 +1,27 @@
 import os
 import azure.cognitiveservices.speech as speechsdk
 import text_to_speech_conv
-import json
+import speech_recognition
 
 # Initialize the speech recognizer
-r = sr.Recognizer()
+
+intro_message = "Hello. How may I assist you?"
+text_to_speech_conv.text_to_speech_conv(intro_message)
 
 while True:
     # Use microphone as the audio source
-    with sr.Microphone() as source:
-        print("Speak something...")
-        audio = r.listen(source)
+    text = speech_recognition.recognize_from_microphone()
 
-    try:
-        # Convert speech to text
-        text = r.recognize_google(audio)
+    if text == "Stop.":
+        print("leaving")
+        break
+    else:
+        text_to_speech_conv.text_to_speech_conv(text)
 
-        print("You said:", text)
+    # First, users speaks into mic asking a question. (wait for button click)
+    # The users speech is converted into text
+    # The users text is then sent to an AI and the AI responds with an answer in text
+    # the AI text response is then converted into speech
 
-        # Check if the user said "Thank you for your time"
-        if "thank you for your time" in text.lower():
-            break
-        else:
-            text_to_speech_conv.text_to_speech_conv(text)
-
-    except sr.UnknownValueError:
-        print("Sorry, I couldn't understand you.")
-
-    except sr.RequestError:
-        print("Sorry, I'm facing some technical issues.")
-
-print("You're welcome! Goodbye!")
+goodbye_message = "You're welcome! Goodbye!"
+text_to_speech_conv.text_to_speech_conv(goodbye_message)
