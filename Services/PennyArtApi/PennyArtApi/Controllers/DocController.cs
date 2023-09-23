@@ -32,7 +32,7 @@ namespace PennyArtApi.Controllers
             };
         }
 
-        [HttpPost("{userId}/{filename}")]
+        [HttpPost("{userId}")]
         public void Post([FromRoute] string userId, IFormFile doc)
         {
             Ok();
