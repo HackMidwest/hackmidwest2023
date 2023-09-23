@@ -1,12 +1,16 @@
 import os
 import azure.cognitiveservices.speech as speechsdk
+import json
 
 # Keys to connect to azure resource
-speach_key = "speech key"
-speech_origin = "centralus"
+with open('keys.json') as json_file:
+    data = json.load(json_file)
+
+speach_key = data['speach_key']
+speach_origin = data['speech_origin']
 
 # This example requires environment variables named "SPEECH_KEY" and "SPEECH_REGION"
-speech_config = speechsdk.SpeechConfig(speach_key, speech_origin)
+speech_config = speechsdk.SpeechConfig(speach_key, speach_origin)
 audio_config = speechsdk.audio.AudioOutputConfig(use_default_speaker=True)
 
 # The language of the voice that speaks.
