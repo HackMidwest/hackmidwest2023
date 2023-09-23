@@ -1,0 +1,33 @@
+<div class="card">
+    <div class="col-5">
+        <p-fieldset legend="Upload My Art" [toggleable]="true">
+            <p-fileUpload name="doc" url="https://pa-api.azurewebsites.net/api/Doc/1001" (onUpload)="onUpload($event)"></p-fileUpload>
+        </p-fieldset>
+    </div>    
+    <div class="grid">
+        <div class="col-6">
+            <div class="grid">
+                <div class="col-3">My Art</div>
+            </div>
+            <div class="grid">
+                <div *ngFor="let item of images" style="margin: 1rem;">
+                    <p-image [src]="item" alt="Image" width="200"></p-image>
+                </div>                
+            </div>           
+        </div>
+        <div class="col-6" *ngIf="upload">
+            <div class="grid">
+                <div class="col-3">Inspired Arts</div>
+            </div>
+            <div class="grid">
+                <div class="col-12">
+                    <div class="grid">
+                        <div *ngFor="let item of inspireimages" style="margin: 1rem;">
+                            <p-image [src]="item" alt="Image" width="200"></p-image>
+                        </div>                        
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
