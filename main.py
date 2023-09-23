@@ -12,6 +12,8 @@ with open('keys.json') as json_file:
 
 openai.api_key = data['OAI-API']
 
+api_call_counter = 0
+
 intro_message = "[MAIN] Hello. How may I assist you?"
 text_to_speech_conv.text_to_speech_conv(intro_message)
 
@@ -35,12 +37,16 @@ while True:
             max_tokens=1000
         )
 
+        api_call_counter += 1
+
         ai_text = response.choices[0].text.strip()
         print(f"[MAIN] AI Test: {ai_text}")
         ai_speech = text_to_speech_conv.text_to_speech_conv(ai_text)
 
         print("[MAIN] Repeated the text from the user into audio. Looping to beginning...")
 
+
+print(f"[MAIN] Number of AI API calls: {api_call_counter}")
 
 goodbye_message = "[MAIN] You're welcome! Goodbye!"
 text_to_speech_conv.text_to_speech_conv(goodbye_message)
