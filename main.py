@@ -3,13 +3,10 @@ import azure.cognitiveservices.speech as speechsdk
 import text_to_speech_conv
 import speech_recognition
 
-# Initialize the speech recognizer
-
 intro_message = "Hello. How may I assist you?"
 text_to_speech_conv.text_to_speech_conv(intro_message)
 
 while True:
-    # Use microphone as the audio source
     text = speech_recognition.recognize_from_microphone()
 
     if text == "Stop.":
