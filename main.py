@@ -14,8 +14,9 @@ openai.api_key = data['OAI-API']
 
 api_call_counter = 0
 
-intro_message = "[MAIN] Hello. How may I assist you?"
+intro_message = "Hello. How may I assist you?"
 text_to_speech_conv.text_to_speech_conv(intro_message)
+
 
 while True:
     user_text = speech_recognition.recognize_from_microphone()
@@ -28,22 +29,23 @@ while True:
         # The users speech is converted into text
         # The users text is then sent to an AI and the AI responds with an answer in text
         # the AI text response is then converted into speech
+        flag = input("type in y to get respond: ")
+        if(flag == "y" or flag == "Y"):
+            user_speech = text_to_speech_conv.text_to_speech_conv(user_text)
 
-        user_speech = text_to_speech_conv.text_to_speech_conv(user_text)
+            response = openai.Completion.create(
+                engine='text-davinci-003',
+                prompt=user_text,
+                max_tokens=1000
+            )
 
-        response = openai.Completion.create(
-            engine='text-davinci-003',
-            prompt=user_text,
-            max_tokens=1000
-        )
+            api_call_counter += 1
 
-        api_call_counter += 1
+            ai_text = response.choices[0].text.strip()
+            print(f"[MAIN] AI Test: {ai_text}")
+            ai_speech = text_to_speech_conv.text_to_speech_conv(ai_text)
 
-        ai_text = response.choices[0].text.strip()
-        print(f"[MAIN] AI Test: {ai_text}")
-        ai_speech = text_to_speech_conv.text_to_speech_conv(ai_text)
-
-        print("[MAIN] Repeated the text from the user into audio. Looping to beginning...")
+            print("[MAIN] Repeated the text from the user into audio. Looping to beginning...")
 
 
 print(f"[MAIN] Number of AI API calls: {api_call_counter}")
