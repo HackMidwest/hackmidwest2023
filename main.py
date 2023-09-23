@@ -7,6 +7,11 @@ import openai
 import json
 
 # to run program, python3 main.py
+#example questions
+# "What was the score when Japan played Sweden?"
+# "Who won when Denmark played Australia?"
+# "What was the goal differential when England played Sweden?"
+# "Which team had the best goal differential over all matches?"
 
 with open('keys.json') as json_file:
     data = json.load(json_file)

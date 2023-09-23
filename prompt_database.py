@@ -69,3 +69,9 @@ def answer_question(question):
     return(answer)
 
 # answer_question("What was the score when Japan played Sweden?")
+
+#example questions
+# "What was the score when Japan played Sweden?"
+# "Who won when Denmark played Australia?"
+# "What was the goal differential when England played Sweden?"
+# "Which team had the best goal differential over all matches?"
