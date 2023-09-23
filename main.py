@@ -2,23 +2,45 @@ import os
 import azure.cognitiveservices.speech as speechsdk
 import text_to_speech_conv
 import speech_recognition
+import openai
+import json
 
-intro_message = "Hello. How may I assist you?"
+# to run program, python3 main.py
+
+with open('keys.json') as json_file:
+    data = json.load(json_file)
+
+openai.api_key = data['OAI-API']
+
+intro_message = "[MAIN] Hello. How may I assist you?"
 text_to_speech_conv.text_to_speech_conv(intro_message)
 
 while True:
-    text = speech_recognition.recognize_from_microphone()
+    user_text = speech_recognition.recognize_from_microphone()
 
-    if text == "Stop.":
-        print("leaving")
+    if user_text == "Stop.":
+        print("[MAIN] User wants to end conversation")
         break
     else:
-        text_to_speech_conv.text_to_speech_conv(text)
+        # First, users speaks into mic asking a question. (wait for button click) (make a button indicting a question)
+        # The users speech is converted into text
+        # The users text is then sent to an AI and the AI responds with an answer in text
+        # the AI text response is then converted into speech
 
-    # First, users speaks into mic asking a question. (wait for button click)
-    # The users speech is converted into text
-    # The users text is then sent to an AI and the AI responds with an answer in text
-    # the AI text response is then converted into speech
+        user_speech = text_to_speech_conv.text_to_speech_conv(user_text)
 
-goodbye_message = "You're welcome! Goodbye!"
+        response = openai.Completion.create(
+            engine='text-davinci-003',
+            prompt=user_text,
+            max_tokens=1000
+        )
+
+        ai_text = response.choices[0].text.strip()
+        print(f"[MAIN] AI Test: {ai_text}")
+        ai_speech = text_to_speech_conv.text_to_speech_conv(ai_text)
+
+        print("[MAIN] Repeated the text from the user into audio. Looping to beginning...")
+
+
+goodbye_message = "[MAIN] You're welcome! Goodbye!"
 text_to_speech_conv.text_to_speech_conv(goodbye_message)

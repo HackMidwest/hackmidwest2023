@@ -4,7 +4,6 @@ import json
 
 # Keys to connect to azure resource
 
-
 def recognize_from_microphone():
     # This example requires environment variables named "SPEECH_KEY" and "SPEECH_REGION"
 
