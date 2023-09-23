@@ -2,16 +2,16 @@ import os
 import azure.cognitiveservices.speech as speechsdk
 import json
 
-def text_to_speech_conv():
+def text_to_speech_conv(text):
     # Keys to connect to azure resource
     with open('keys.json') as json_file:
         data = json.load(json_file)
 
-    speach_key = data['speach_key']
-    speach_origin = data['speech_origin']
+    speech_key = data['speech_key']
+    speech_origin = data['speech_origin']
 
     # This example requires environment variables named "SPEECH_KEY" and "SPEECH_REGION"
-    speech_config = speechsdk.SpeechConfig(speach_key, speach_origin)
+    speech_config = speechsdk.SpeechConfig(speech_key, speech_origin)
     audio_config = speechsdk.audio.AudioOutputConfig(use_default_speaker=True)
 
     # The language of the voice that speaks.
@@ -20,8 +20,11 @@ def text_to_speech_conv():
     speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config)
 
     # Get text from the console and synthesize to the default speaker.
-    print("Enter some text that you want to speak >")
-    text = input()
+    # print("Enter some text that you want to speak >")
+    # text = input()
+
+    # Get the text the user prompted and converted into speech
+    print(f"Users asked: {text}")
 
     speech_synthesis_result = speech_synthesizer.speak_text_async(text).get()
 
@@ -34,5 +37,3 @@ def text_to_speech_conv():
             if cancellation_details.error_details:
                 print("Error details: {}".format(cancellation_details.error_details))
                 print("Did you set the speech resource key and region values?")
-
-text_to_speech_conv()
