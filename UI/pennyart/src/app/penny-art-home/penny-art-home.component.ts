@@ -3,29 +3,29 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-penny-art-home',
   templateUrl: './penny-art-home.component.html',
-  styleUrls: ['./penny-art-home.component.scss']
+  styleUrls: ['./penny-art-home.component.scss'],
 })
 export class PennyArtHomeComponent implements OnInit {
   public images!: any[];
   public inspireimages!: any[];
-  upload = false;
+  upload = true;
 
-  responsiveOptions:any[] = [
-  {
+  responsiveOptions: any[] = [
+    {
       breakpoint: '1024px',
-      numVisible: 5
-  },
-  {
+      numVisible: 5,
+    },
+    {
       breakpoint: '768px',
-      numVisible: 3
-  },
-  {
+      numVisible: 3,
+    },
+    {
       breakpoint: '560px',
-      numVisible: 1
-  }
-];
+      numVisible: 1,
+    },
+  ];
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.images = [];
@@ -47,5 +47,4 @@ export class PennyArtHomeComponent implements OnInit {
   onUpload(e: Event) {
     this.upload = true;
   }
-
 }

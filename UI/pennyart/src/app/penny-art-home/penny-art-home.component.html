@@ -1,33 +1,66 @@
-<div class="card">
-    <div class="col-5">
-        <p-fieldset legend="Upload My Art" [toggleable]="true">
-            <p-fileUpload name="doc" url="https://pa-api.azurewebsites.net/api/Doc/1001" (onUpload)="onUpload($event)"></p-fileUpload>
-        </p-fieldset>
-    </div>    
-    <div class="grid">
-        <div class="col-6">
-            <div class="grid">
-                <div class="col-3">My Art</div>
-            </div>
-            <div class="grid">
-                <div *ngFor="let item of images" style="margin: 1rem;">
-                    <p-image [src]="item" alt="Image" width="200"></p-image>
-                </div>                
-            </div>           
-        </div>
-        <div class="col-6" *ngIf="upload">
-            <div class="grid">
-                <div class="col-3">Inspired Arts</div>
-            </div>
-            <div class="grid">
-                <div class="col-12">
-                    <div class="grid">
-                        <div *ngFor="let item of inspireimages" style="margin: 1rem;">
-                            <p-image [src]="item" alt="Image" width="200"></p-image>
-                        </div>                        
-                    </div>                    
-                </div>
-            </div>
-        </div>
+<div class="pa-home-wrapper">
+  <!-- Hero -->
+  <div class="pa-home-hero grid">
+    <div>
+      <h1>Penny<span>Art</span></h1>
+      <h2>create<span>.</span>share<span>.</span>earn</h2>
     </div>
+    <div>
+      <img class="pa-hero--image" src="../../assets/images/image-10.png" />
+    </div>
+  </div>
+  <div>
+    <p-fileUpload
+      class="pa-upload"
+      name="doc"
+      url="https://pa-api.azurewebsites.net/api/Doc/1001"
+      (onUpload)="onUpload($event)"
+    ></p-fileUpload>
+  </div>
+  <div class="grid">
+    <div class="col-12">
+      <div>
+        <h2 class="a-heading">My Art</h2>
+        <div class="col-6"></div>
+      </div>
+      <div class="grid">
+        <div
+          class="pa-nft-card"
+          *ngFor="let item of images"
+          style="margin: 1rem"
+        >
+          <p-image [src]="item" alt="Image" width="200"></p-image>
+          <div class="pa-nft-card--meta">
+            <h3 class="c-subheading">Image title</h3>
+            <p-button
+              label="Send"
+              styleClass="p-button-rounded p-button-outlined p-button-sm"
+            ></p-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="col-12" *ngIf="upload">
+      <div class="grid">
+        <div class="col-6">
+          <h2 class="a-heading">Inspired Arts</h2>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="col-12">
+          <div class="grid">
+            <div
+              class="pa-nft-card--inspired"
+              *ngFor="let item of inspireimages"
+              style="margin: 1rem"
+            >
+              <p-image [src]="item" alt="Image" width="200"></p-image>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
