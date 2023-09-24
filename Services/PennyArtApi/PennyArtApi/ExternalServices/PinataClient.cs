@@ -85,7 +85,7 @@ namespace PennyArtApi.ExternalServices
             return new List<DocResponse>();
         }
 
-        public async Task<IEnumerable<DocResponse>> SearchByTags(string tagset)
+        public async Task<IEnumerable<DocResponse>> SearchByTags(string userId, string tagset)
         {
             HashSet<DocResponse> dResponse = new();
             var tags = tagset.Split(',');
@@ -99,6 +99,7 @@ namespace PennyArtApi.ExternalServices
                 request.AddQueryParameter("status", "pinned");
                 request.AddQueryParameter("pageLimit", "5");
                 request.AddQueryParameter("metadata[keyvalues][tags]", "{\"value\":\"%" + tag + "%\",\"op\":\"iLike\"}");
+                request.AddQueryParameter("metadata[keyvalues][userId]", "{\"value\":\"" + userId + "\",\"op\":\"ne\"}");
                 var response = await client.ExecuteAsync(request);
 
                 if (response.IsSuccessful)

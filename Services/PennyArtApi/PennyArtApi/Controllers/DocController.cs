@@ -27,10 +27,10 @@ namespace PennyArtApi.Controllers
             return pResponse;
         }
 
-        [HttpGet("tags/{tags}")]
-        public async Task<IEnumerable<DocResponse>> GetInspired(string tags)
+        [HttpGet("tags/{userId}/{tags}")]
+        public async Task<IEnumerable<DocResponse>> GetInspired(string userId, string tags)
         {
-            var pResponse = await _pinataClient.SearchByTags(tags);
+            var pResponse = await _pinataClient.SearchByTags(userId, tags);
 
             return pResponse;
         }
