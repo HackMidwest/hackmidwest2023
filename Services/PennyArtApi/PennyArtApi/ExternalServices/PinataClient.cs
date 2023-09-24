@@ -5,6 +5,7 @@ using PennyArtApi.Models.Responses;
 using RestSharp;
 using System.Text.Json;
 using System.Linq;
+using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace PennyArtApi.ExternalServices
 {
@@ -82,6 +83,39 @@ namespace PennyArtApi.ExternalServices
             }
 
             return new List<DocResponse>();
+        }
+
+        public async Task<IEnumerable<DocResponse>> SearchByTags(string tagset)
+        {
+            HashSet<DocResponse> dResponse = new();
+            var tags = tagset.Split(',');
+            var client = new RestClient();
+
+            foreach (var tag in tags)
+            {
+                var request = new RestRequest($"{_options.BaseUrl}/data/pinList", Method.Get);
+                request.AddHeader("Authorization", $"Bearer {_options.ApiJwt}");
+                request.AddHeader("Accept", "application/json");
+                request.AddQueryParameter("status", "pinned");
+                request.AddQueryParameter("pageLimit", "5");
+                request.AddQueryParameter("metadata[keyvalues][tags]", "{\"value\":\"%" + tag + "%\",\"op\":\"iLike\"}");
+                var response = await client.ExecuteAsync(request);
+
+                if (response.IsSuccessful)
+                {
+                    var pResponse = JsonSerializer.Deserialize<PinListResponse>(response.Content);
+
+                    foreach (var item in pResponse.rows)
+                    {
+                        if (!dResponse.Any(x => x.Url.Contains(item.ipfs_pin_hash, StringComparison.InvariantCultureIgnoreCase)))
+                        {
+                            dResponse.Add(DocResponse.FromPinListResponseRow(item, _options.GatewayUrl));
+                        }                        
+                    }                    
+                }
+            }
+
+            return dResponse;
         }
 
         private async Task UpdateWithTags(PinFileResponse pin, string userId)

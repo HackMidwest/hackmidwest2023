@@ -27,6 +27,14 @@ namespace PennyArtApi.Controllers
             return pResponse;
         }
 
+        [HttpGet("tags/{tags}")]
+        public async Task<IEnumerable<DocResponse>> GetInspired(string tags)
+        {
+            var pResponse = await _pinataClient.SearchByTags(tags);
+
+            return pResponse;
+        }
+
         [HttpPost("{userId}")]
         public async Task PostAsync([FromRoute] string userId, IFormFile doc)
         {
