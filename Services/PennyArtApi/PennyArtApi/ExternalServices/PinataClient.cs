@@ -45,7 +45,7 @@ namespace PennyArtApi.ExternalServices
                 var pResponse = JsonSerializer.Deserialize<PinFileResponse>(response.Content);
 
                 await _crossmintClient.MintNft($"{_options.GatewayUrl}/ipfs/{pResponse.IpfsHash}", "0x78394Bed766e66be178220924A734F2E13237B54");
-                await UpdateWithTags(pResponse);
+                await UpdateWithTags(pResponse, userId);
 
                 return pResponse;
             }
@@ -84,14 +84,16 @@ namespace PennyArtApi.ExternalServices
             return new List<DocResponse>();
         }
 
-        private async Task UpdateWithTags(PinFileResponse pin)
+        private async Task UpdateWithTags(PinFileResponse pin, string userId)
         {
             ImageAnalyzer ia = new();
             var tags = await ia.AnalyzeAsync($"{_options.GatewayUrl}/ipfs/{pin.IpfsHash}");
             var sTags = string.Join(",", tags);
             PinUpdateMetadata metadata = new();
             metadata.ipfsPinHash = pin.IpfsHash;
+            
             metadata.keyvalues.Add("tags", sTags);
+            metadata.keyvalues.Add("userId", userId);
 
             var client = new RestClient();
             var request = new RestRequest($"{_options.BaseUrl}/pinning/hashMetadata", Method.Put);
