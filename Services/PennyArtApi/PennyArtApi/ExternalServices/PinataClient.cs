@@ -45,6 +45,7 @@ namespace PennyArtApi.ExternalServices
                 var pResponse = JsonSerializer.Deserialize<PinFileResponse>(response.Content);
 
                 await _crossmintClient.MintNft($"{_options.GatewayUrl}/ipfs/{pResponse.IpfsHash}", "0x78394Bed766e66be178220924A734F2E13237B54");
+                await UpdateWithTags(pResponse);
 
                 return pResponse;
             }
@@ -63,6 +64,7 @@ namespace PennyArtApi.ExternalServices
             request.AddHeader("Authorization", $"Bearer {_options.ApiJwt}");
             request.AddHeader("Accept", "application/json");
             request.AddQueryParameter("status", "pinned");
+            request.AddQueryParameter("pageLimit", "1000");
             request.AddQueryParameter("metadata[keyvalues][userId]", "{\"value\":\"" + userId + "\",\"op\":\"eq\"}");
             var response = await client.ExecuteAsync(request);
 
@@ -80,6 +82,29 @@ namespace PennyArtApi.ExternalServices
             }
 
             return new List<DocResponse>();
+        }
+
+        private async Task UpdateWithTags(PinFileResponse pin)
+        {
+            ImageAnalyzer ia = new();
+            var tags = await ia.AnalyzeAsync($"{_options.GatewayUrl}/ipfs/{pin.IpfsHash}");
+            var sTags = string.Join(",", tags);
+            PinUpdateMetadata metadata = new();
+            metadata.ipfsPinHash = pin.IpfsHash;
+            metadata.keyvalues.Add("tags", sTags);
+
+            var client = new RestClient();
+            var request = new RestRequest($"{_options.BaseUrl}/pinning/hashMetadata", Method.Put);
+            request.AddHeader("Authorization", $"Bearer {_options.ApiJwt}");
+            request.AddHeader("Accept", "application/json");
+            request.AddJsonBody(JsonSerializer.Serialize(metadata));
+
+            var response = await client.ExecuteAsync(request);
+
+            if (response.IsSuccessful)
+            {
+
+            }
         }
     }
 }
