@@ -62,6 +62,7 @@ namespace PennyArtApi.ExternalServices
             var request = new RestRequest($"{_options.BaseUrl}/data/pinList", Method.Get);
             request.AddHeader("Authorization", $"Bearer {_options.ApiJwt}");
             request.AddHeader("Accept", "application/json");
+            request.AddQueryParameter("status", "pinned");
             request.AddQueryParameter("metadata[keyvalues][userId]", "{\"value\":\"" + userId + "\",\"op\":\"eq\"}");
             var response = await client.ExecuteAsync(request);
 
