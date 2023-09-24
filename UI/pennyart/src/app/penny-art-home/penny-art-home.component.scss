@@ -59,7 +59,6 @@
     font-family: "Inter", sans-serif;
     line-height: 1.5;
   }
-
   .pa-home-hero {
     align-items: center;
     display: flex;
@@ -101,16 +100,44 @@
       height: auto;
     }
   }
-
   .p-fileupload .p-fileupload-buttonbar {
-    background: hotpink;
-    padding: 0.857rem 1rem;
-    border: 1px solid #c8c8c8;
+    background: #fff;
+    padding: 16px 1rem;
+    border: none;
+    border-radius: 64px;
     color: #333333;
     border-bottom: 0 none;
     border: none;
+    position: relative;
+    z-index: 1;
+    .p-button {
+      color: #ffffff;
+      background: #1db9d2;
+      border: 1px solid #1db9d2;
+      padding: 0.429rem 1rem;
+      font-size: 1rem;
+      transition: background-color 0.2s, color 0.2s, border-color 0.2s,
+        box-shadow 0.2s;
+      border-radius: 32px;
+    }
+  }
+  .p-fileupload .p-fileupload-content {
+    background: #ffffff;
+    padding: 16px;
+    border: none;
+    border-radius: 32px;
+    border-bottom-right-radius: 32px;
+    border-bottom-left-radius: 32px;
+    color: #333333;
+    position: relative;
+    top: -32px;
+    opacity: 0;
+    z-index: 0;
   }
 
+  .p-fileupload-files .ng-star-inserted {
+    margin-top: 32px;
+  }
   /* Headings */
   .cross-head {
     text-align: center;
@@ -121,55 +148,45 @@
     line-height: 49.11px;
     font-weight: 800;
   }
-
   .b-heading {
     font-size: 29.2px;
     line-height: 43.8px;
   }
-
   .c-heading {
     font-size: 26px;
     line-height: 39px;
   }
-
   .d-heading {
     font-size: 23.08px;
     line-height: 34.61px;
   }
-
   .e-heading {
     font-size: 20.48px;
     line-height: 30.72px;
   }
-
   .f-heading {
     font-size: 18.18px;
     line-height: 27.27px;
   }
-
   .a-subheading {
     font-size: 21.74px;
     font-weight: 600;
     line-height: 32.61px;
   }
-
   .b-subheading {
     font-size: 19.34px;
     font-weight: 600;
     line-height: 29.01px;
   }
-
   .c-subheading {
     font-size: 17.07px;
     font-weight: 600;
     line-height: 25.61px;
   }
-
   /* Lead-in */
   .lead-in {
     font-size: 1.5rem;
   }
-
   /* Paragraph */
   p {
     font-size: 1rem;
