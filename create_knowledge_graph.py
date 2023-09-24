@@ -8,22 +8,25 @@ from getpass import getpass
 import re
 import time
 import random
+import json
 import backoff
 
-openai_key = "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"
 
-neo4j_pwd = "hackmidwest"
+
+######
+with open('keys.json') as json_file:
+
+    data = json.load(json_file)
+
+#######
+openai_key = data['OAI-API']
+
+neo4j_pwd = data['neo4j-pass']
 
 openai.api_key = openai_key
 
-bolt_uri = "bolt://44.203.67.35:7687"
-driver = GraphDatabase.driver(bolt_uri, auth=("Long", neo4j_pwd))
-
-response = requests.get("https://archive.ics.uci.edu/static/public/450/sports+articles+for+objectivity+analysis.zip", stream=True)
-with open("sports_articles.zip",'wb') as output:
-    output.write(response.content)  
-
-shutil.unpack_archive("sports_articles.zip", "sports_articles")
+bolt_uri = data['neo4j-uri']
+driver = GraphDatabase.driver(bolt_uri, auth=(data['neo4j-username'], neo4j_pwd))
 
 p = Path('./sports_articles/Raw data')
 
@@ -135,7 +138,3 @@ def send_row_to_neo4j(row):
 
 _ = output_df.apply(send_row_to_neo4j, axis=1)
 
-with driver.session() as session:
-    result = session.run("""MATCH (n) RETURN labels(n) as labels, count(*) as nodeCount""")
-    result_df = pd.DataFrame([row.data() for row in result])
-result_df
