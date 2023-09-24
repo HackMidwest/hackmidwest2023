@@ -24,6 +24,7 @@ namespace PennyArtApi
             builder.Services.AddHttpClient<CrossmintClient>();
 
             builder.Services.AddScoped<IPinataClient, PinataClient>();
+            builder.Services.AddScoped<ICrossmintClient, CrossmintClient>();
 
             var app = builder.Build();
 

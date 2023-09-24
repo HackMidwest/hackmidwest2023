@@ -13,12 +13,14 @@ namespace PennyArtApi.ExternalServices
         private readonly ILogger<PinataClient> _logger;
         private readonly PinataOptions _options;
         private readonly HttpClient _httpClient;
+        private readonly ICrossmintClient _crossmintClient;
 
-        public PinataClient(ILogger<PinataClient> logger, IOptions<PinataOptions> options, HttpClient httpClient)
+        public PinataClient(ILogger<PinataClient> logger, IOptions<PinataOptions> options, HttpClient httpClient, ICrossmintClient crossmintClient)
         {
             _logger = logger;
             _options = options.Value;
             _httpClient = httpClient;
+            _crossmintClient = crossmintClient;
         }
 
         public async Task<PinFileResponse?> PinFileToIpfsAsync(Stream file, string filename, string userId)
@@ -41,6 +43,9 @@ namespace PennyArtApi.ExternalServices
                 request.AddParameter("pinataOptions", "{\"cidVersion\":0}");
                 RestResponse response = await client.ExecuteAsync(request);
                 var pResponse = JsonSerializer.Deserialize<PinFileResponse>(response.Content);
+
+                await _crossmintClient.MintNft($"{_options.GatewayUrl}/ipfs/{pResponse.IpfsHash}", "0x78394Bed766e66be178220924A734F2E13237B54");
+
                 return pResponse;
             }
             catch (Exception ex)
