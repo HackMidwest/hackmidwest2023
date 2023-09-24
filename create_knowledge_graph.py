@@ -10,16 +10,20 @@ import time
 import random
 import backoff
 
+openai_key = "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"
 
-openai_key = "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"
-
-neo4j_pwd = "deposits-frequency-lifetimes"
+neo4j_pwd = "hackmidwest"
 
 openai.api_key = openai_key
 
 bolt_uri = "bolt://44.203.67.35:7687"
-driver = GraphDatabase.driver(bolt_uri, auth=("neo4j", neo4j_pwd))
+driver = GraphDatabase.driver(bolt_uri, auth=("Long", neo4j_pwd))
 
+response = requests.get("https://archive.ics.uci.edu/static/public/450/sports+articles+for+objectivity+analysis.zip", stream=True)
+with open("sports_articles.zip",'wb') as output:
+    output.write(response.content)  
+
+shutil.unpack_archive("sports_articles.zip", "sports_articles")
 
 p = Path('./sports_articles/Raw data')
 
@@ -40,17 +44,15 @@ articles_df.shape
 
 examples_df = articles_df.iloc[:2,:]
 
-articles_df.drop([0, 1], inplace=True)
+examples_df = examples_df._append(articles_df.loc[616])
+
+articles_df.drop([0, 1, 616], inplace=True)
 
 examples_df['entities'] = ""
 
 print(examples_df.loc[0, "text"])
 
-examples_df.loc[0, "entities"] = "Sports:Ice dancing\nTeams:\nAthletes:Meryl Davis, Charlie, White, Judy Schwomeyer, James Sladky, Judy Blumberg, Michael Seibering, Namomi Lang, Peter Tchernyshev, Tanith Belbin, Ben Agosto, Madison Chock, Evan Bates, Maia Shibutani, Alex Shibutani, Marissa Castelli, Simon Shnapir, Tessa Virtue, Scott Moir\nSporting events:US Figure Skating Championships, Vancourver Olympics, 2010 World Figure Skating Championships, 2012 World Figure Skating Championships, 2011 World Figure Skating Championships, Figure Skating Grand Prix"
 
-print(examples_df.loc[1, "text"])
-
-examples_df.loc[1, "entities"] = "Sports:Soccer\nTeams:Bayern, Bayer Leverkusen, Frieburg, Borussia Dortmund\nAthletes:Christian Molinaro, Mario Mandzukic, Thomas Mueller\nSporting events:"
 
 articles_df['len'] = articles_df['text'].str.len()
 
@@ -92,11 +94,11 @@ def get_entities(article):
     entities = pd.Series({"sports": sports, "teams": teams, "athletes": athletes, "events": events})
     return entities
 
-
+print(articles_df[0:10])
 
 entities_df = pd.DataFrame(columns=["sports", "teams", "athletes", "events"])
 
-for idx, row in articles_df.iterrows():
+for idx, row in articles_df[0:10].iterrows():
     entities = get_entities(row['text'])
     entities.name = idx
     entities_df = entities_df._append(entities)
@@ -104,7 +106,6 @@ for idx, row in articles_df.iterrows():
         print(f"Processed {entities_df.shape[0]} articles.")
 
 output_df = articles_df.merge(entities_df, how="inner", left_index=True, right_index=True)
-
 
 def send_row_to_neo4j(row):
     with driver.session() as session:
@@ -130,56 +131,11 @@ def send_row_to_neo4j(row):
                        MERGE (a)-[:REFERENCES_EVENT]->(e)""",
                     {"article": row["article"],
                      "events": row["events"]})
-                                                     
+                                                                                  
+
 _ = output_df.apply(send_row_to_neo4j, axis=1)
 
 with driver.session() as session:
     result = session.run("""MATCH (n) RETURN labels(n) as labels, count(*) as nodeCount""")
     result_df = pd.DataFrame([row.data() for row in result])
 result_df
-
-
-
-with driver.session() as session:
-    result = session.run("""MATCH (s:Sport) 
-                            RETURN s.name as sport, 
-                            COUNT{ (s)<-[:REFERENCES_SPORT]-() } AS articleCount
-                            ORDER BY articleCount DESC
-                            LIMIT 10""")
-    result_df = pd.DataFrame([row.data() for row in result])
-result_df
-
-
-
-with driver.session() as session:
-    result = session.run("""MATCH (s1:Sport)<-[:REFERENCES_SPORT]-()-[:REFERENCES_SPORT]->(s2)
-                            WHERE s1.name < s2.name
-                            RETURN s1.name AS sport1, s2.name AS sport2, count(*) as articleCount
-                            ORDER BY articleCount DESC
-                            LIMIT 10""")
-    result_df = pd.DataFrame([row.data() for row in result])
-result_df
-
-with driver.session() as session:
-    result = session.run("""MATCH (a:Athlete) 
-                            RETURN a.name as athlete, 
-                            COUNT{ (a)<-[:REFERENCES_ATHLETE]-() } AS articleCount
-                            ORDER BY articleCount DESC
-                            LIMIT 10""")
-    result_df = pd.DataFrame([row.data() for row in result])
-result_df
-
-
-
-with driver.session() as session:
-    result = session.run("""MATCH (a:Athlete {name:"KOBE BRYANT"})-[:REFERENCES_ATHLETE]-(art)
-                            MATCH (art)-[:REFERENCES_ATHLETE]->(n)
-                            WHERE n <> a
-                            RETURN n.name AS mentionedWithKobe, count(*) as articleCount
-                            ORDER BY articleCount DESC
-                            LIMIT 10""")
-    result_df = pd.DataFrame([row.data() for row in result])
-result_df
-
-
-
