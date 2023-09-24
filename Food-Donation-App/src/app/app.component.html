@@ -1,0 +1,72 @@
+<div class="container mx-auto p-6">
+    <!-- Header -->
+    <header class="mb-6">
+      <nav *ngIf="this.loggedIn == true" class="mt-4">
+        <a class="mr-4" routerLink="/feed">Feed</a>
+        <a class="mr-4" routerLink="/post">Post</a>
+      </nav>
+    </header>
+<!-- Section: Design Block -->
+<ng-container *ngIf="this.loggedIn == false">
+<section class="text-center text-lg-start p-2">
+    <div class="card border-0 p-2">
+      <div class="row g-0 d-flex align-items-center">
+        <div class="col-lg-4 d-none d-lg-flex">
+          <img src="../assets/logo.png" alt="ShareTable Logo"
+            class="img-fluid rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-2" />
+        </div>
+        <div class="col-lg-8">
+          <div class="card-body py-5 px-md-5">
+            <form [formGroup]="loginForm">
+                <h1>ShareTable</h1>
+              <!-- Username input -->
+              <div class="form-outline mb-4">
+                <input type="username" id="form2Example1" formControlName="username" class="form-control" (input)="this.onChange()"/>
+                <label class="form-label" for="form2Example1">Username</label>
+              </div>
+              <!-- Password input -->
+              <div class="form-outline mb-4">
+                <input type="password" id="form2Example2" formControlName="password" class="form-control" />
+                <label class="form-label" for="form2Example2">Password</label>
+              </div>
+              <!-- 2 column grid layout for inline styling -->
+              <div class="row mb-4">
+                <div class="col d-flex justify-content-center">
+                  <!-- Checkbox -->
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
+                    <label class="form-check-label" for="form2Example31"> Remember me </label>
+                  </div>
+                </div>
+                <div class="col">
+                  <a href="#!">Forgot password?</a>
+                </div>
+              </div>
+              <button (click)="this.onSubmit()" type="button" style="font-size: 20px;" class="btn btn-primary btn-block mb-4 col-lg-12">Sign in</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</ng-container>
+
+
+    <!-- Main Content -->
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  <!-- Footer -->
+<footer class="bg-link text-center ">
+  <!-- Grid container -->
+  <div class="container p-4">
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3">
+    © 2023 Copyright:
+    <p class="text-dark">ShareTable - Food Donation Initiative. All Rights Reserved.</p>
+  </div>
+  <!-- Copyright -->
+  

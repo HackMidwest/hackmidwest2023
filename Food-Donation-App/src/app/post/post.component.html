@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+    Header
+</head>
+
+
+  <body>
+    <h1>Create Post</h1>
+
+    <form [formGroup]="postForm">
+        <div>
+            <h3>Post Details</h3>
+            <label>Text: </label>
+            <input type="text" formControlName="textForm" placeholder="Enter a description..." name="text">
+            <br>
+
+            <label>Image: </label>
+            <input type="text" formControlName="imageForm" placeholder="Enter an image description..." name="image">
+            <br>
+        </div>
+            
+        <div>
+            <h3>Restrictions</h3>
+            <label>Vegetarian</label><input type="checkbox" formControlName="vegetarianBox"><br>
+            <label>Vegan</label><input type="checkbox" formControlName="veganBox"><br>
+            <label>Halal</label><input type="checkbox" formControlName="halalBox"><br>
+            <label>Kosher</label><input type="checkbox" formControlName="kosherBox"><br>
+        </div>
+    </form>
+
+    <div>
+        <h3>Post</h3>
+        <input type="submit" id="submit" value="Post" (click)="this.onSubmit()">
+    </div>
+</body>
