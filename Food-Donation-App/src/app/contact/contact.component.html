@@ -1,0 +1,63 @@
+<div class="container mt-5">
+  <!-- Jumbotron -->
+  <div class="jumbotron text-center">
+    <h1 class="display-4">Contact Us</h1>
+    <p class="lead">Have questions or want to volunteer? Reach out!</p>
+  </div>
+
+  <!-- Contact Form -->
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="mb-3">
+          <label for="textForm" class="form-label">Name</label>
+          <input type="text" class="form-control" id="textForm" formControlName="textForm" placeholder="John Doe">
+        </div>
+        <div class="mb-3">
+          <label for="textForm" class="form-label">Email address</label>
+          <input type="text" class="form-control" id="textForm" formControlName="textForm" placeholder="name@example.com">
+        </div>
+        <div class="mb-3">
+          <label for="textForm" class="form-label">Message</label>
+          <textarea class="form-control" id="textForm" formControlName="textForm" rows="5" placeholder="Your message..."></textarea>
+        </div>
+        <button (click)="toggleModal()" type="submit" class="btn btn-primary">Submit</button>
+    </div>
+
+  <!-- Contact Details -->
+  <div class="row mt-5 p-5 bg-light">
+    <div class="col-md-4 text-center">
+      <i class="fa fa-phone fa-1x mb-3"></i>
+      <h5>Phone</h5>
+      <p>+123 456 7890</p>
+    </div>
+    <div class="col-md-4 text-center">
+      <i class="fa fa-envelope fa-1x mb-3"></i>
+      <h5>Email</h5>
+      <a href="mailto:info@sharetable.com">info@sharetable.com</a>
+    </div>
+    <div class="col-md-4 text-center">
+      <i class="fa fa-map-marker-alt fa-1x mb-3"></i>
+      <h5>Address</h5>
+      <p>123 N Street, Kansas City, USA</p>
+    </div>
+  </div>
+
+  <!-- Modal -->
+<div *ngIf="showModal" class="modal show d-block" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Message Sent!</h5>
+        </div>
+        <div class="modal-body">
+            Thank you for contacting us! We will get back to you as soon as possible!
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="closeAndReset()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="showModal" class="modal-backdrop fade show"></div>
+

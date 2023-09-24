@@ -1,0 +1,20 @@
+.rounded-t-5 {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+@media (min-width: 992px) {
+  .rounded-tr-lg-0 {
+    border-top-right-radius: 0;
+  }
+
+  .rounded-bl-lg-5 {
+    border-bottom-left-radius: 0.5rem;
+  }
+}
+
+.active-nav {
+  color: #004d90; /* This is just an example color. Use whatever color or styles you prefer. */
+  font-weight: bold;
+}
+

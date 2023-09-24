@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodDonationAPI", "FoodDonationAPI\FoodDonationAPI.csproj", "{E7BCA02A-113C-4D02-8A57-147DE4257BF8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E7BCA02A-113C-4D02-8A57-147DE4257BF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7BCA02A-113C-4D02-8A57-147DE4257BF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7BCA02A-113C-4D02-8A57-147DE4257BF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7BCA02A-113C-4D02-8A57-147DE4257BF8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C5951AB0-F8DE-49A2-9AAD-C3378FE33523}
+	EndGlobalSection
+EndGlobal

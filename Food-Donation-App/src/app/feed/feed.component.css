@@ -1,0 +1,25 @@
+.interest-button {
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 2;  /* Added z-index to ensure the button is above other elements */
+  }
+  
+  .image:hover .interest-button {
+    opacity: 1;
+  }
+  
+  .image:hover .mask {
+    cursor: pointer;  /* To show the hand cursor indicating clickable action */
+  }
+
+  /* Hide the button by default */
+.interest-button {
+  display: none;
+}
+
+/* Show the button when the parent is hovered */
+.image:hover .interest-button {
+  display: block;
+}
+
+  

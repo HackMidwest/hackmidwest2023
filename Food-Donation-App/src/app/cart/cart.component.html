@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<head>
+    <Title>Cart Form</Title>>
+</head>
+
+
+<body>
+  <section>
+    <div class="row gx-lg-5">
+      <div *ngFor="let item of newsItems" class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+        <!-- News block -->
+        <div>
+          <!-- Featured image -->
+          <!-- Featured image -->
+            <div class="image hover-overlay shadow-1-strong ripple rounded-5 mb-4 position-relative" data-mdb-ripple-color="light">
+                <img [src]="item.imageUrl" class="img-fluid" />
+
+                <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                </a>
+            </div>
+
+          <!-- Article data -->
+          <div class="row mb-3">
+            <div class="col-6">
+              <a href="" [ngClass]="item.categoryColor">
+                {{ item.category }}
+              </a>
+            </div>
+            <div class="col-6 text-end">
+                {{ item.date }}
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <!-- Profile picture and name -->
+            <div class="col-4">
+              <img [src]="item.profileImage" alt="{{ item.profileName }}" class="img-fluid rounded-circle">
+              <p class="text-center">{{ item.profileName }}</p>
+            </div>
+
+            <!-- Article title and description -->
+            <div class="col-8 p-2">
+                <h4>{{ item.title }}</h4>
+                <p>{{ item.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pagination -->
+  <nav class="my-4" aria-label="...">
+    <ul class="pagination pagination-circle justify-content-center">
+      <li class="page-item">
+        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item active" aria-current="page">
+        <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#">Next</a>
+      </li>
+    </ul>
+  </nav>
+</body>
