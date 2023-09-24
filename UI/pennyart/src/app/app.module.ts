@@ -11,8 +11,12 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GalleriaModule } from 'primeng/galleria';
 import { FormsModule } from '@angular/forms';
-
-
+import { DialogModule } from 'primeng/dialog';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {ButtonModule} from 'primeng/button';
+import { PennyartService } from './service/pennyart.service';
+import { ToastModule } from 'primeng/toast';
+import {RippleModule} from 'primeng/ripple';
 
 @NgModule({
   declarations: [
@@ -28,15 +32,25 @@ import { FormsModule } from '@angular/forms';
     ImageModule,
     FieldsetModule,
     BrowserAnimationsModule,
-    GalleriaModule
+    GalleriaModule,
+    DialogModule,
+    InputTextareaModule,
+    ButtonModule,
+    ToastModule,
+    RippleModule
   ],
   exports: [
     FileUploadModule,
     ImageModule,
     FieldsetModule,
-    GalleriaModule
+    GalleriaModule,
+    DialogModule,
+    InputTextareaModule,
+    ButtonModule,
+    ToastModule,
+    RippleModule
   ],
-  providers: [],
+  providers: [PennyartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

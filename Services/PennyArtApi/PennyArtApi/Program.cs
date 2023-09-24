@@ -1,4 +1,7 @@
 
+using PennyArtApi.ExternalServices;
+using PennyArtApi.Models;
+
 namespace PennyArtApi
 {
     public class Program
@@ -14,14 +17,20 @@ namespace PennyArtApi
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.Configure<CrossmintOptions>(builder.Configuration.GetSection("CrossmintOptions"));
+            builder.Services.Configure<PinataOptions>(builder.Configuration.GetSection("PinataOptions"));
+
+            builder.Services.AddHttpClient<PinataClient>();
+            builder.Services.AddHttpClient<CrossmintClient>();
+
+            builder.Services.AddScoped<IPinataClient, PinataClient>();
+            builder.Services.AddScoped<ICrossmintClient, CrossmintClient>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseHttpsRedirection();
 

@@ -1,3 +1,5 @@
+<p-toast></p-toast>
+
 <div class="pa-home-wrapper">
   <!-- Hero -->
   <div class="pa-home-hero grid">
@@ -13,7 +15,7 @@
     <p-fileUpload
       class="pa-upload"
       name="doc"
-      url="https://pa-api.azurewebsites.net/api/Doc/1001"
+      url="https://pa-api.azurewebsites.net/api/Doc/bob"
       (onUpload)="onUpload($event)"
     ></p-fileUpload>
   </div>
@@ -29,7 +31,12 @@
           *ngFor="let item of images"
           style="margin: 1rem"
         >
-          <p-image [src]="item" alt="Image" width="200"></p-image>
+          <p-image
+            [src]="item.url"
+            alt="Image"
+            width="200"
+            (click)="showDialog(item)"
+          ></p-image>
           <div class="pa-nft-card--meta">
             <h3 class="c-subheading">Image title</h3>
             <p-button
@@ -56,7 +63,12 @@
               *ngFor="let item of inspireimages"
               style="margin: 1rem"
             >
-              <p-image [src]="item" alt="Image" width="200"></p-image>
+              <p-image
+                [src]="item.url"
+                alt="Image"
+                width="200"
+                (click)="showDialog(item)"
+              ></p-image>
             </div>
           </div>
         </div>
@@ -64,3 +76,51 @@
     </div>
   </div>
 </div>
+
+<p-dialog
+  header="Send Greetings"
+  [(visible)]="display"
+  [modal]="true"
+  [style]="{ width: '50vw', height: '50vw' }"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+  #greetings
+>
+  <div class="grid">
+    <div class="col-12 col-offset-3" *ngIf="selectedImage">
+      <span>{{ selectedImage.name }}</span>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="col-9 col-offset-3" *ngIf="selectedImage">
+      <p-image
+        [src]="selectedImage.url"
+        alt="Image"
+        width="300"
+        height="300"
+      ></p-image>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="col-3 col-offset-3">
+      <textarea
+        placeholder="Enter greetings here"
+        pInputTextarea
+        [(ngModel)]="greetText"
+        [rows]="5"
+        [cols]="40"
+      ></textarea>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="col-3 col-offset-6">
+      <button
+        pButton
+        type="button"
+        label="Send Greetings"
+        (click)="sendGreetings($event)"
+      ></button>
+    </div>
+  </div>
+</p-dialog>
