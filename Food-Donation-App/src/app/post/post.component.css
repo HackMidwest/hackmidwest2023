@@ -1,0 +1,10 @@
+.modal {
+    z-index: 1051;
+    background-color: #FFFFFF;
+}
+
+.modal-backdrop {
+    z-index: 1050;
+}
+
+

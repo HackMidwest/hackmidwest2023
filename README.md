@@ -14,20 +14,20 @@ Ensure you have reviewed the [Rules & FAQ](https://hackmidwest.com/#faq)
 ## Who's on your team?
 *List the full names,  email address & Github username of your teammates*
 
-1.   **Full Name**  || **fullname@company.com**  (or fullname@school.edu if you're a CS student) || **Github Username**
-2. 
-3.
-4.
+1. Bryn Smith || bryn.smith@hrblock.com || BrynSmith10
+2. Shailynn Hacker || shailynn.hacker@hrblock.com || AreceliEos
+3. Mason Harper    || mason.harper@hrblock.com    || HarperM164
+4. Caulfield Pearson || caulfield.pearson@hrblock.com || caulpearson
 5.
 
 <br /><br />
 
 
 ## What is the name of your App?
-
+ShareTable
 <br /><br />
 ## What does your app do?
-*Describe in a paragraph or so*
+ShareTable serves as a bridge between businesses with surplus food and individuals facing food scarcity. Designed with an intuitive interface, businesses can effortlessly create donation posts to offer excess food items, ensuring they don't go to waste. Users can browse the feed, filled with vibrant images and descriptions, to find available donations nearby. With features like category filtering and contact options, connecting donors and recipients has never been easier. The platform not only aids in reducing food wastage but also plays a pivotal role in supporting community members in need.
 
 <br /><br />
 
@@ -39,7 +39,7 @@ Ensure you have reviewed the [Rules & FAQ](https://hackmidwest.com/#faq)
 - [ ]  Pinata ERC-6551 Challenge
 - [ ]  Okta Challenge
 - [ ]  GEHA Generative AI Emergency Response Challenge
-- [ ]  Corporate Challenge (only for official company teams)
+- [ X]  Corporate Challenge (only for official company teams)
 - [ ]  College Challenge (only for teams of up to 5 CS students from the same school)
 
 <br /><br />

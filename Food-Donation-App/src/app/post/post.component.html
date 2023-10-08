@@ -1,0 +1,81 @@
+<!-- Jumbotron -->
+<div id="intro" class="p-5 text-center bg-light">
+    <h1 class="mb-3 h2">Share a Table with Us</h1>
+    <p class="mb-3">Become a donor, and change someone's life</p>
+    <a class="btn btn-primary m-2" routerLink="/feed" role="button" >Check out Listings</a>
+    <a class="btn btn-primary m-2" routerLink="/about" role="button">About our Mission</a>
+  </div>
+  <!-- Jumbotron -->
+
+<!-- Post Template -->
+<div class="container mt-4">
+  <h1>Create Post</h1>
+
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+
+    <div class="card mb-4 p-3">
+      <h3>Post Details</h3>
+      <div class="mb-3">
+        <label for="titleForm" class="form-label">Title:</label>
+        <input type="text" class="form-control" id="titleForm" formControlName="titleForm"
+               placeholder="Enter a title...">
+      </div>
+
+      <div class="mb-3">
+        <label for="textForm" class="form-label">Text:</label>
+        <input type="text" class="form-control" id="textForm" formControlName="textForm"
+               placeholder="Enter a description...">
+      </div>
+
+    </div>
+
+    <div class="card mb-4 p-3">
+      <h3>Options</h3>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="radio" name="type" formControlName="type" value="Produce">
+            <label class="form-check-label">Vegetarian</label>
+          </div>
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="radio" name="type" formControlName="type" value="Barbeque">
+            <label class="form-check-label">BBQ</label>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="radio" name="type" formControlName="type" value="Deli">
+            <label class="form-check-label">Deli</label>
+          </div>
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="radio" name="type" formControlName="type" value="Bakery">
+            <label class="form-check-label">Bakery</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mb-4">
+      <button type="submit" class="btn btn-primary col-lg-4" (click)="toggleModal()">Post</button>
+    </div>
+  </form>
+</div>
+<!-- Post Template -->
+
+
+<!-- Modal -->
+<div *ngIf="showModal" class="modal show d-block" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Thank You!</h5>
+      </div>
+      <div class="modal-body">
+        Thank you for your generous donation! Your contribution will make a difference in someone's life.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="closeAndReset()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="showModal" class="modal-backdrop fade show"></div>

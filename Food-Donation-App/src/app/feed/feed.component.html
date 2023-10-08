@@ -1,0 +1,71 @@
+<!-- Jumbotron -->
+<div id="intro" class="p-5 text-center bg-light">
+  <h1 class="mb-3 h2">Impact</h1>
+  <p class="mb-3">Be a donor, and share a table with our community</p>
+  <a class="btn btn-primary m-2" routerLink="/post" role="button" *ngIf="this.business">Become a Donor</a>
+  <a class="btn btn-primary m-2" routerLink="/about" role="button">About our Mission</a>
+</div>
+<!-- Jumbotron -->
+<!--Main Navigation-->
+
+<!--Main layout-->
+<main class="my-5">
+  <div class="container">
+    <section>
+      <div class="row gx-lg-5">
+        <ng-container *ngFor="let item of newsItems">
+          <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+          <!-- News block -->
+          <div>
+            <!-- Featured image -->
+            <!-- Featured image -->
+            <div class="image hover-overlay shadow-1-strong ripple rounded-5 mb-4 position-relative"
+                 data-mdb-ripple-color="light">
+              <img [src]="item.imageUrl" class="img-fluid"/>
+
+              <!-- Hover button -->
+              <button class="interest-button btn btn-dark position-absolute top-50 start-50 translate-middle"
+                      (click)="claimItem(item)"
+                      (mouseover)="showButton = true"
+                      (mouseleave)="showButton = false"
+                      *ngIf="!this.business">
+                Claim Item
+              </button>
+
+              <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </a>
+            </div>
+
+            <!-- Article data -->
+            <div class="row mb-3">
+              <div class="col-6">
+                <a href="">
+                  {{ item.category }}
+                </a>
+              </div>
+              <div class="col-6 text-end">
+                {{ item.date }}
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <!-- Profile picture and name -->
+              <div class="col-4">
+                <img [src]="item.profileImage" alt="{{ item.profileName }}" class="img-fluid rounded-circle">
+                <p class="text-center">{{ item.profileName }}</p>
+              </div>
+
+              <!-- Article title and description -->
+              <div class="col-8 p-2">
+                <h4>{{ item.title }}</h4>
+                <p>{{ item.description }}</p>
+              </div>
+            </div>
+          </div>
+          </div>
+        </ng-container>
+      </div>
+    </section>
+  </div>
+</main>
