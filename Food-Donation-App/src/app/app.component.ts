@@ -77,25 +77,34 @@ export class AppComponent implements OnInit {
       console.log(this.loginForm.controls['username'].value);
       console.log(this.loginForm.controls['password'].value);
 
-      // Navigate to home after successful login
-      this.loggedIn = true;
+
 
       var response = await this.login.login(this.username, this.password) as LoginModel;
-      localStorage.setItem("username", response.name);
-      localStorage.setItem("id", response.id.toString());
-      localStorage.setItem("pictureUrl", response.pictureUrl);
-      localStorage.setItem("business", response.business.toString());
-
-      this.id = response.id;
-      this.pictureUrl = response.pictureUrl;
-      this.business = response.business;
-
+      console.log("response:");
       console.log(response);
+      if(response.name == null || response.name == ''){
+        alert('Please enter a valid username and password');
+      } else {
+        localStorage.setItem("username", response.name);
+        localStorage.setItem("id", response.id.toString());
+        localStorage.setItem("pictureUrl", response.pictureUrl);
+        localStorage.setItem("business", response.business.toString());
 
-      console.log(this.id);
-      console.log(this.pictureUrl);
+        this.id = response.id;
+        this.pictureUrl = response.pictureUrl;
+        this.business = response.business;
 
-      this.router.navigateByUrl('/feed');
+        console.log(response);
+
+        console.log(this.id);
+        console.log(this.pictureUrl);
+
+        // Navigate to home after successful login
+        this.loggedIn = true;
+        this.router.navigateByUrl('/feed');
+      }
+
+
     }
   }
 }
